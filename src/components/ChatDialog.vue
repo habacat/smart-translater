@@ -313,4 +313,30 @@ export default {
   background-color: #fff;
   border-top: 1px solid #e4e7ed;
 }
+
+.dark-mode .chat-header {
+  background-color: #2c2c2c;
+  border-bottom-color: #4a4a4a;
+}
+
+.dark-mode .chat-body {
+  background-color: #1a1a1a;
+}
+
+.dark-mode .input-container {
+  background-color: #2c2c2c;
+  border-top-color: #4a4a4a;
+}
+
+.dark-mode .el-input__inner {
+  background-color: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-mode .el-button {
+  background-color: #444;
+  border-color: #555;
+  color: #e0e0e0;
+}
 </style>

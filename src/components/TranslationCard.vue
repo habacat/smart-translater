@@ -1,5 +1,5 @@
 <template>
-  <el-card class="translation-card">
+  <el-card class="translation-card" :class="{ 'dark-mode': isDarkMode }">
     <div class="language-selector">
       <el-select v-model="sourceLang" placeholder="源语言">
         <el-option
@@ -90,13 +90,21 @@ export default {
       alternatives: [],
       translationSource: 'deepl',
       models: [],
-      selectedModel: ''
+      selectedModel: '',
+      isDarkMode: false,
     }
   },
   created() {
     this.loadSettings();
+    this.isDarkMode = document.body.classList.contains('dark-mode');
+  },
+  mounted() {
+    this.updateTheme();
   },
   methods: {
+    updateTheme() {
+      this.isDarkMode = document.body.classList.contains('dark-mode');
+    },
     loadSettings() {
       this.models = (localStorage.getItem('VUE_APP_MODELS') || process.env.VUE_APP_MODELS || '').split(',').map(model => model.trim());
       this.selectedModel = this.models[0] || 'gpt-4o-mini';
@@ -222,10 +230,40 @@ export default {
       };
       return langs[code] || code;
     }
+  },
+  props: {
+    themeChanged: Number
+  },
+  watch: {
+    themeChanged() {
+      this.updateTheme();
+    }
   }
 }
 </script>
 <style scoped>
+.dark-mode .el-radio__label {
+  color: #fff;
+}
+
+.dark-mode .el-radio__input.is-checked .el-radio__inner {
+  border-color: #409EFF;
+  background: #409EFF;
+}
+
+.dark-mode .el-radio__input.is-checked+.el-radio__label {
+  color: #409EFF;
+}
+
+.dark-mode .el-radio__inner {
+  background-color: #000;
+  border-color: #5a5a5a;
+}
+
+.dark-mode .el-radio__inner:hover {
+  border-color: #409EFF;
+}
+
 .translation-card {
   margin-bottom: 20px;
 }
