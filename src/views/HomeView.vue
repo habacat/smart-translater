@@ -69,6 +69,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
 .home {
   max-width: 800px;
   margin: 0 auto;
